@@ -34,16 +34,10 @@ export class Database {
   select(table, search) {
     let data = this.#database[table] ?? [];
 
-    const searchIsValid = Object.entries(search).some(
-      ([_, value]) => value !== undefined
-    );
-
-    if (!searchIsValid) {
-      return data;
-    }
-
     data = data.filter((row) => {
       return Object.entries(search).some(([key, value]) => {
+        if (!value) return true;
+
         return row[key].includes(value);
       });
     });
