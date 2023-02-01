@@ -34,8 +34,6 @@ export class Database {
   select(table, search) {
     let data = this.#database[table] ?? [];
 
-    // console.log(search);
-
     const searchIsValid = Object.entries(search).some(
       ([_, value]) => value !== undefined
     );

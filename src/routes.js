@@ -26,10 +26,17 @@ export const routes = [
     handler: (req, res) => {
       const { description, title } = req.body;
 
+      if (!description || !title) {
+        return res.writeHead(400).end();
+      }
+
       const task = {
         id: randomUUID(),
         description,
         title,
+        completed_at: null,
+        created_at: new Date(),
+        updated_at: new Date(),
       };
 
       database.insert('tasks', task);
